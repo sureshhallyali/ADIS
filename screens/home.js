@@ -4,7 +4,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 export default class SignUpForm extends Component {
     show = () => {
-        this.props.navigation.navigate('Recognsation');
+        this.props.navigation.navigate('CowDetails');
     }
   render() {
     return (
@@ -21,7 +21,7 @@ export default class SignUpForm extends Component {
               {/*Lable for menu item */}
               <Text style={Styles.menuText}>Cow Register</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={Styles.menuItem}>
+            <TouchableOpacity onPress={this.show} style={Styles.menuItem}>
               {/* icon for menu item */}
               <View>
               <FontAwesome5 name={'list-alt'} size={60} color={'#f4f4f4'}/>
