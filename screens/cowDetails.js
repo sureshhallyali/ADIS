@@ -11,6 +11,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 class Cows extends Component {
+
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -91,6 +93,9 @@ class Cows extends Component {
         }
         
     }
+
+    
+    
     render() {
         return (
             <FlatList
@@ -123,7 +128,7 @@ class Cows extends Component {
                                     <Text style={Styles.info}><Text style={Styles.bold}>Name:</Text> {Cow.name}</Text>
                                     <Text style={Styles.info}><Text style={Styles.bold}>Breed:</Text> {Cow.breed}</Text>
                                 </View>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={this.show} >
                                     <View style={Styles.viewBtn} >
                                         <Text style={{ color: '#ffffff', fontSize: 16, fontWeight: "600"}}>View Details</Text>
                                     </View>
