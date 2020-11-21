@@ -11,7 +11,7 @@ class Cows extends Component {
         this.state = {
             data: [
                 {
-                    cowid: "7026785526-gangadhar-67gir5566",
+                    cowid: "7026785526-ramdaspatil-67gir5566",
                     image: "https://us.123rf.com/450wm/photographerriju/photographerriju1805/photographerriju180500046/102164539-a-indian-baby-cow.jpg?ver=6",
                     name: "Mahadevi",
                     tagNumber: 56278282,
