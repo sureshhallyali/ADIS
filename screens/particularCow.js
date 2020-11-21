@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { FlatList, TouchableOpacity } from 'react-native-gesture-handler';
-import { View, Text, Image, StyleSheet, Animated, ScrollView, Dimensions, Linking } from 'react-native';
+import { FlatList, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, Modal, Image, StyleSheet, Animated, ScrollView, Dimensions, Linking, Button } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 const { width } = Dimensions.get("window");
 
 class Cows extends Component {
@@ -95,7 +95,8 @@ export default class Cowdetails extends Component {
         translateX: new Animated.Value(0),
         translateXMuzzleTab: new Animated.Value(width),
         translateXFeatureTab: new Animated.Value(0),
-        translateY: -1000
+        translateY: -1000,
+        modalOpen: false
             
     }
 
@@ -136,8 +137,12 @@ export default class Cowdetails extends Component {
         }
     }
 
+    setModalVisible = (visible) => {
+        this.setState({ modalOpen: visible });
+      }
     render() {
-        let {translateY, translateXFeatureTab, xbtn1, xbtn2, translateX, active, translateXMuzzleTab } = this.state;
+        const { modalOpen } = this.state;
+        let { translateY, translateXFeatureTab, xbtn1, xbtn2, translateX, active, translateXMuzzleTab } = this.state;
         return (
             <>
                 <ScrollView>
@@ -145,7 +150,12 @@ export default class Cowdetails extends Component {
                 {/* latest updated status */}
                 <View style={Styles.updateStatus}>
 
-                    <TouchableOpacity style={[Styles.Btn, Styles.sell]}>
+                    <TouchableOpacity
+                                style={[Styles.Btn, Styles.sell]}
+                                onPress={() => {
+                                    this.setModalVisible(true);
+                                  }}
+                        >
                         <Text style={Styles.text}>Sell</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[Styles.Btn, Styles.edit]}>
@@ -153,7 +163,37 @@ export default class Cowdetails extends Component {
                     </TouchableOpacity>
                         <Text style={{ color: "#fff" }}><Text style={{ fontSize: 14, fontWeight: '400', color: '#eee' }}>Last Updated: </Text> 12/10/2020</Text>
                 </View>
-                    
+                <Modal
+                            visible={modalOpen}
+                            animationType="slide"
+                            transparent={true}
+                        >
+                            <View style={{width:"100%", height: "100%", backgroundColor: "rgba(0,0,0,0.7)"}} />
+                            <View style={Styles.sellPopUp}>
+                                <FontAwesome
+                                    size={30}
+                                    name={"times"}
+                                    color="#808080"
+                                    onPress={() => {
+                                        this.setModalVisible(false);
+                                      }}
+                                />
+                                <Text style={{fontSize:16, marginTop:30, marginBottom: 10}}>Enter the base price</Text>
+                                <View style={{flexDirection:"row", justifyContent: "center", alignItems: "center"}}>
+                                    <TextInput
+                                        style={Styles.priceInput}
+                                        placeholder="base price in Rs."
+                                        keyboardType="number-pad"
+                                    />
+                                    <View style={{marginLeft: 10}}>
+                                        <Button
+                                            title="confirm"
+                                            color="#cf7500"
+                                        />
+                                    </View>
+                                </View>
+                            </View>      
+                </Modal>
                 {/* details of the cow */}
                 <View style={Styles.detailsHead}>
                     <Text style={Styles.detailsText}>Details</Text>
@@ -345,6 +385,25 @@ const Styles = StyleSheet.create({
         height: 300,
         margin: 2,
         borderRadius: 4
+    },
+    sellPopUp: {
+        width: "100%",
+        height: "30%",
+        backgroundColor: "#ffffff",
+        position: "absolute",
+        bottom: 0,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    priceInput: {
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#f4f4f4",
+        paddingRight: 20,
+        paddingLeft: 20,
+        borderRadius: 50
     }
     
     
