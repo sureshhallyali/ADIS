@@ -9,11 +9,13 @@ import SignUp from './screens/signUp';
 import Recognsation from './screens/recognisation';
 import CowDetails from './screens/cowDetails';
 import ParticularCow from './screens/particularCow';
-
+import profile from "./screens/profile";
 const App = createStackNavigator({
+  profile: { screen: profile},
+  Home: { screen: Home },
   ParticularCow: { screen: ParticularCow },
   SignIn: { screen: SignIn },
-  Home: { screen: Home },
+  
   SignUp: { screen: SignUp },
   Recognsation: { screen: Recognsation },
   CowDetails: { screen: CowDetails },
